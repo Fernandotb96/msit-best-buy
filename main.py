@@ -65,11 +65,14 @@ def make_order(shop):
         # Save tuple (product, amount) inside shopping_cart list
         selected_product = active_products[int(product_choice) - 1]
         selected_quantity = int(amount_choice)
+        if selected_quantity > selected_product.quantity:
+            print(f"Only {selected_product.quantity} units available.")
+            continue
         shopping_cart.append((selected_product, selected_quantity))
         print(f"Added {selected_product.name} x {selected_quantity} to your cart!\n")
 
     if shopping_cart:
-        total_price = best_buy.order(shopping_cart)
+        total_price = shop.order(shopping_cart)
         print(f"Order processed successfully! Total payment: {total_price}$")
 
 
