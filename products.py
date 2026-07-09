@@ -45,7 +45,7 @@ class Product:
         if self.quantity >= quantity:
             self.add_quantity(-quantity)
             return self.price * quantity
-        elif not self.is_active():
+        if not self.is_active():
             print("Product out of stock!")
             return 0.0
         print(f"Not enough products in store, only {self.quantity} in stock.")
