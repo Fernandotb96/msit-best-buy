@@ -11,7 +11,7 @@ class Product:
 
     def add_quantity(self, quantity):
         self.quantity += quantity
-        if self.quantity == 0:
+        if self.quantity <= 0:
             self.active = False
         else:
             self.active = True
