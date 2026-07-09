@@ -11,13 +11,13 @@ best_buy = store.Store(product_list)
 
 def print_menu():
     print("""
-    Welcome to Best Buy Shop!
-    -----------------------------
-    1. List all products in store
-    2. Show total amount in store
-    3. Make an order
-    4. Quit
-    """)
+        Best Buy Shop
+-----------------------------
+1. List all products in store
+2. Show total amount in store
+3. Make an order
+4. Quit
+""")
 
 
 def print_products_stock(shop):
@@ -25,13 +25,13 @@ def print_products_stock(shop):
     shop_products = shop.get_all_products()
     for index, product in enumerate(shop_products, start=1):
         print(f"{index}. {product.name}, Price: ${product.price}, Quantity: {product.quantity}")
-    print("-" * 30)
+    print("-" * 29)
 
 
 def print_quantity(shop):
     print("----- Total stock amount -----")
     products_quantity = shop.get_total_quantity()
-    print(f"Total Quantity: {products_quantity} products")
+    print(f"Total quantity: {products_quantity} products")
 
 
 def make_order(shop):
@@ -42,14 +42,14 @@ def make_order(shop):
 
     while True:
         # Ask for product number
-        product_choice = input("Enter the product number you want to buy: ")
+        product_choice = input("Enter the product number you want to buy: ").strip()
         if product_choice == "":
             break
         if not product_choice.isdigit() or not (1 <= int(product_choice) <= len(active_products)):
             print("Error selecting product! Invalid option.")
             continue
         # Ask for amount
-        amount_choice = input("Enter the product amount you want to buy: ")
+        amount_choice = input("Enter the product amount you want to buy: ").strip()
         if amount_choice == "":
             break
         if not amount_choice.isdigit():
@@ -64,3 +64,27 @@ def make_order(shop):
     if shopping_cart:
         total_price = best_buy.order(shopping_cart)
         print(f"Order processed successfully! Total payment: {total_price}$")
+
+
+def start(shop):
+    router = {
+        "1": print_products_stock,
+        "2": print_quantity,
+        "3": make_order
+    }
+    print("Welcome to the Best Buy Shop!")
+    while True:
+        print_menu()
+        user_choice = input("Enter your choice [1-4]: ").strip()
+        print("")
+        if user_choice == "4":
+            print("Thanks for visiting!")
+            break
+        elif user_choice in router:
+            router[user_choice](shop)
+        else:
+            print("Invalid choice! Please try again.")
+
+
+if __name__ == "__main__":
+    start(best_buy)
