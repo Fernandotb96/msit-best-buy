@@ -10,6 +10,7 @@ best_buy = store.Store(product_list)
 
 
 def print_menu():
+    """Display the main menu options.Display the main menu options."""
     print("""
         Best Buy Shop
 -----------------------------
@@ -21,6 +22,7 @@ def print_menu():
 
 
 def print_products_stock(shop):
+    """Display all active products available in the store."""
     print("----- Products in stock -----")
     shop_products = shop.get_all_products()
     for index, product in enumerate(shop_products, start=1):
@@ -29,12 +31,17 @@ def print_products_stock(shop):
 
 
 def print_quantity(shop):
+    """Display the total quantity of products in the store."""
     print("----- Total stock amount -----")
     products_quantity = shop.get_total_quantity()
     print(f"Total quantity: {products_quantity} products")
 
 
 def make_order(shop):
+    """
+    Allow the user to create and process an order.
+    The user selects products and quantities until the order is completed.
+    """
     print_products_stock(shop)
     print("When you want to finish the order, press Enter without typing anything.")
     shopping_cart = []
@@ -67,6 +74,8 @@ def make_order(shop):
 
 
 def start(shop):
+    """Start the Best Buy application.
+    Displays the main menu and handles user interaction."""
     router = {
         "1": print_products_stock,
         "2": print_quantity,
