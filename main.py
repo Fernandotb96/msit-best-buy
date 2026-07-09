@@ -1,7 +1,7 @@
 import products
 import store
 
-# Initial setup of inventory
+# Initial setup of inventory and store
 product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                 products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                 products.Product("Google Pixel 7", price=500, quantity=250)
@@ -23,8 +23,8 @@ def print_menu():
 def print_products_stock(shop):
     print("----- Products in stock -----")
     shop_products = shop.get_all_products()
-    for product in shop_products:
-        print(f"{product.name}, Price: {product.price}$, Quantity: {product.quantity}")
+    for index, product in enumerate(shop_products, start=1):
+        print(f"{index}. {product.name}, Price: ${product.price}, Quantity: {product.quantity}")
     print("-" * 30)
 
 
@@ -35,4 +35,32 @@ def print_quantity(shop):
 
 
 def make_order(shop):
-    pass
+    print_products_stock(shop)
+    print("When you want to finish the order, press Enter without typing anything.")
+    shopping_cart = []
+    active_products = shop.get_all_products()
+
+    while True:
+        # Ask for product number
+        product_choice = input("Enter the product number you want to buy: ")
+        if product_choice == "":
+            break
+        if not product_choice.isdigit() or not (1 <= int(product_choice) <= len(active_products)):
+            print("Error selecting product! Invalid option.")
+            continue
+        # Ask for amount
+        amount_choice = input("Enter the product amount you want to buy: ")
+        if amount_choice == "":
+            break
+        if not amount_choice.isdigit():
+            print("Error adding quantity! Must be a number.")
+            continue
+        # Save tuple (product, amount) inside shopping_cart list
+        selected_product = active_products[int(product_choice) - 1]
+        selected_quantity = int(amount_choice)
+        shopping_cart.append((selected_product, selected_quantity))
+        print(f"Added {selected_product.name} x {selected_quantity} to your cart!\n")
+
+    if shopping_cart:
+        total_price = best_buy.order(shopping_cart)
+        print(f"Order processed successfully! Total payment: {total_price}$")
