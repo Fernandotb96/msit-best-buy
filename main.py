@@ -52,7 +52,7 @@ def make_order(shop):
         product_choice = input("Enter the product number you want to buy: ").strip()
         if product_choice == "":
             break
-        if not product_choice.isdigit() or not (1 <= int(product_choice) <= len(active_products)):
+        if not product_choice.isdigit() or not 1 <= int(product_choice) <= len(active_products):
             print("Error selecting product! Invalid option.")
             continue
         # Ask for amount

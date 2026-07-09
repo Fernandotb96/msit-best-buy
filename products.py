@@ -22,7 +22,7 @@ class Product:
         self.active = False
 
     def add_quantity(self, quantity):
-        """Add or remove units from the stock, also updates the active status if no more units in stock."""
+        """Add or remove units from the stock and updates the status if no more units in stock."""
         self.quantity += quantity
         if self.quantity <= 0:
             self.deactivate()
@@ -45,6 +45,9 @@ class Product:
         if self.quantity >= quantity:
             self.add_quantity(-quantity)
             return self.price * quantity
+        elif not self.is_active():
+            print("Product out of stock!")
+            return 0.0
         else:
             print(f"Not enough products in store, only {self.quantity} in stock.")
             return 0.0
