@@ -48,6 +48,5 @@ class Product:
         elif not self.is_active():
             print("Product out of stock!")
             return 0.0
-        else:
-            print(f"Not enough products in store, only {self.quantity} in stock.")
-            return 0.0
+        print(f"Not enough products in store, only {self.quantity} in stock.")
+        return 0.0

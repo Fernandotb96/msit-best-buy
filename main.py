@@ -88,7 +88,7 @@ def start(shop):
         if user_choice == "4":
             print("Thanks for visiting!")
             break
-        elif user_choice in router:
+        if user_choice in router:
             router[user_choice](shop)
         else:
             print("Invalid choice! Please try again.")
