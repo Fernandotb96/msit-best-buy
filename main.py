@@ -53,7 +53,7 @@ def make_order(shop):
         if amount_choice == "":
             break
         if not amount_choice.isdigit():
-            print("Error adding quantity! Must be a number.")
+            print("Error adding quantity! Must be a positive number.")
             continue
         # Order product in store
         selected_product = active_products[int(product_choice) - 1]
